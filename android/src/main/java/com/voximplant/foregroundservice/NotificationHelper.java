@@ -81,8 +81,14 @@ class NotificationHelper {
             return null;
         }
         Intent notificationIntent = new Intent(context, mainActivityClass);
+        boolean refreshAcrivity = true; 
+        if(notificationConfig.containsKey("refreshActivity")) {
+            refreshAcrivity = notificationConfig.getBoolean("refreshActivity");
+        }
         // [mattveraldi] add flags to not kill the activity
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        if(!refreshAcrivity) {
+            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        }
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
         Notification.Builder notificationBuilder;
@@ -135,7 +141,9 @@ class NotificationHelper {
 
         Notification notification = notificationBuilder.build();
         // [mattveraldi] add flags to not kill the activity
-        notification.flags = Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+        if(!refreshAcrivity) {
+            notification.flags = Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+        }
         return notification;
     }
 

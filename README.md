@@ -156,3 +156,4 @@ NotificationConfig
 | icon          | Icon name                                                                                                                                               | yes                   |
 | priority      | Priority of this notification. One of: <ul><li>&nbsp;0 – PRIORITY_DEFAULT (by default)</li><li>-1 – PRIORITY_LOW</li><li>-2 – PRIORITY_MIN</li><li>&nbsp;1 – PRIORITY_HIGH</li><li>&nbsp;2 – PRIORITY_MAX</li></ul> | no       |
 | killOnDestroy | if true, kill service when the app is destroyed | no (default: false)
+| refreshActivity | if true, activity will restart if accessed via the notification | no (default: true)
